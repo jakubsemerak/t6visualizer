@@ -17,8 +17,8 @@ Cycles-baked lighting, first-person WASD walk with colliders and minimap).
 
 - 3 seats in front (driver + double passenger bench) and 2 (optionally 3) seats in the rear → 5–6 seats.
 - Simple, everyday-usable for 4–5 people; rear seats removable for more cargo space.
-- Lower bed comfortable for **two people 187 cm tall** → hard minimum **1950 mm long, 1150 mm wide**
-  (≥ 1200 preferred).
+- Lower bed comfortable for **two people 187 cm tall** → hard minimum **1950 mm long, 1120 mm wide** (the
+  standard 3/4 rock-and-roll bed width; ≥ 1200 preferred, shown as a warning below it).
 - Sleeping capacity compared across options: 2 below, optional 2 more in a pop-top.
 - English UI; runs locally.
 
@@ -37,7 +37,8 @@ tailgate kitchens.
 
 All dimensions come from `docs/research/2026-09-30-t61-swb-dimensions-and-conversions.md`, primarily
 VW's bodybuilder drawings and guidelines. They live in `data/van.json` in VW's coordinate system
-(mm; X rearward from the front axle, Y positive to the right, Z0 ≈ wheel-centre height). Every value
+(mm; X rearward from the front axle, Y positive to the right). Z is measured up from the cargo-floor
+top, not VW's wheel-centre Z0, so every furniture height reads directly as "height above floor". Every value
 carries a `source` field. Values scaled from drawings carry `approx: true`, and the UI marks
 them "± verify on your van". Where sources conflict, `van.json` stores both, and the app uses the more
 conservative (smaller) figure.
@@ -94,7 +95,7 @@ therefore gives more rear legroom but a shorter bed, and the UI shows this trade
 Vite + TypeScript, Three.js (current release, ≥ 0.170), vanilla DOM UI (no framework), Vitest.
 
 ```
-blender/build_shell.py   builds the Mixto shell from data/van.json, bakes AO in Cycles, exports public/models/van.glb (Draco)
+blender/build_shell.py   builds the Mixto shell from data/van.json, bakes AO to vertex colours in Cycles, exports public/models/van.glb
 data/van.json            body dimensions + cross-sections + sources
 data/modules/*.json      module catalogue (dims, mass, cost, approval flags, sources)
 data/presets/*.json      the 5 presets
@@ -111,11 +112,14 @@ public/models/van.glb    committed build output, so the app runs without Blender
    `blender -b --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb`.
    It builds: floor, wheel arches, pillars, side walls with window cut-outs (sliding window in door,
    fixed front-left), sliding-door and tailgate openings, simplified cab and dashboard, and roof in three
-   swappable variants (fixed, pop-top closed, pop-top open). It bakes **ambient occlusion only**, so the
-   bake stays valid whatever furniture is inside. Real-time lights handle the rest.
-2. **Module builders (`src/three/modules`).** One function per module type:
-   `rnrBench`, `singleSeat`, `factoryBench`, `kitchenBlock`, `wardrobe`, `sideLocker`, `boxKitchen`,
-   `cab3Seats`, `popTopBed`. Signature: `(params) → { group: THREE.Group, colliders: Box[] }`. Seated and
+   swappable variants (fixed, pop-top closed, pop-top open). It bakes **ambient occlusion only**, into vertex
+   colours, so the bake stays valid whatever furniture is inside. No Draco: the shell is small, and
+   skipping it means no decoder to host. Real-time lights handle the rest.
+2. **Module builders (`src/core/modules`).** One function per module type:
+   `cabSeats`, `rnrBench` (also used for single seats), `factoryBench`, `bedPlatform`, `kitchenBlock`,
+   `wardrobe`, `sideLocker`, `boxKitchen`, `popTopBed`. Signature: `(params, ctx) → PlacedModule`, whose
+   `parts` (role + box) are both the colliders and the geometry. They are built in the pure core so tests can
+   check them. `src/three/moduleMesh.ts` turns a `PlacedModule` into meshes. Each builder has seated and
    flat (bed) states.
 3. **Layout core (`src/core`).** `buildLayout(van, preset, overrides) → Layout` produces placed modules
    in van coordinates. `evaluate(layout) → { metrics, checks }`:
@@ -123,7 +127,7 @@ public/models/van.glb    committed build output, so the app runs without Blender
      metadata; rear legroom; counter length; fridge L; water L; boot length/volume behind the seated
      bench; standing height; estimated mass vs payload; estimated cost range.
    - Checks (warnings, never silent): module–module and module–body collisions; blocked sliding door;
-     seat on wheel arch; bed < 1950 or < 1150 wide (fails 2 × 187 cm); headroom without pop-top;
+     seat on wheel arch; bed < 1950 long or < 1120 wide (fails 2 × 187 cm), < 1200 wide (warning); headroom without pop-top;
      payload exceeded; seats without an approval flag.
 4. **Views.**
    - Orbit/cutaway: roof and near wall fade; dimension overlay toggle; seat/bed state toggle; light toggle.
@@ -132,7 +136,7 @@ public/models/van.glb    committed build output, so the app runs without Blender
    - Plan: top view + side section, 1:10 / 1:20, dimension chains (living length, bench position, bed,
      kitchen, gaps).
    - Compare: all presets with current overrides; hard requirements (≥ 5 seats, bed ≥ 1950 × 1150,
-     removable rear seats) shown pass/fail; the rest shown as values. A "best match" badge goes to presets
+     removable rear seats; bed means ≥ 1950 × 1120) shown pass/fail; the rest shown as values. A "best match" badge goes to presets
      passing every hard requirement, ranked by bed width and then boot length.
 5. **Export.** SVG with real-mm units (prints at chosen scale), title block (preset, overrides, date,
    "approx values – verify on van").
