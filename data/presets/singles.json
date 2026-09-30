@@ -1,0 +1,15 @@
+{
+  "id": "singles",
+  "name": "Two sliding singles",
+  "basedOn": "MAL Tourliner / Smart Bed rail systems",
+  "summary": "Two 600 mm rock-and-roll singles on rails that slide together into one bed and can each be removed; short driver-side kitchen and low locker.",
+  "sources": ["https://www.mal-vw.co.uk/tourliner.html", "https://www.t6forum.com/threads/rib-bed-rail-system-width.55643/"],
+  "removedKg": 70,
+  "modules": [
+    { "id": "cab", "kind": "cabSeats", "label": "Cab seats", "params": { "passenger": "doubleBench" } },
+    { "id": "kitchen", "kind": "kitchenBlock", "label": "Kitchen block", "params": { "x0": 1470, "length": 1000, "maxLength": 1100, "depth": 340, "height": 800, "side": "left", "fridge": "coolbox", "waterL": 20 } },
+    { "id": "locker", "kind": "sideLocker", "label": "Low locker", "params": { "x0": 2480, "length": 1390, "height": 340, "side": "left", "innerY": 440 } },
+    { "id": "seatL", "kind": "rnrBench", "label": "Rear seat left", "params": { "model": "single-600", "frontX": 1920, "yCenter": -130, "railRange": [1620, 2220], "railStep": 100, "removable": true } },
+    { "id": "seatR", "kind": "rnrBench", "label": "Rear seat right", "params": { "model": "single-600", "frontX": 1920, "yCenter": 475, "railRange": [1620, 2220], "railStep": 100, "removable": true } }
+  ]
+}

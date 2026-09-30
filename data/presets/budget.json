@@ -1,0 +1,13 @@
+{
+  "id": "budget",
+  "name": "Budget: keep Mixto bench",
+  "basedOn": "multivan-shop.cz bed kit for the factory 3-seat bench",
+  "summary": "Keeps the fixed factory 3-seat bench; partition removed; bed-kit platform with storage box behind the bench. Cheapest, but the bed is short.",
+  "sources": ["https://www.multivan-shop.cz/luzkova-uprava-pro-vw-t5/t6/t6-1-transporter/caravelle-kratky-rozvor-s-trojlavici"],
+  "removedKg": 25,
+  "modules": [
+    { "id": "cab", "kind": "cabSeats", "label": "Cab seats", "params": { "passenger": "doubleBench" } },
+    { "id": "bench", "kind": "factoryBench", "label": "Factory Mixto bench (fixed)", "params": { "frontX": 1700, "width": 1430 } },
+    { "id": "platform", "kind": "bedPlatform", "label": "Bed-kit platform", "params": { "x0": 1700, "nominalLength": 1880, "width": 1430 } }
+  ]
+}

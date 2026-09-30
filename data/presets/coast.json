@@ -1,0 +1,17 @@
+{
+  "id": "coast",
+  "name": "Coast-style",
+  "basedOn": "VW California 6.1 Coast / Ocean",
+  "summary": "Driver-side kitchen block (sink, hob, 42 L compressor fridge, 30 L water), 2-seat bench on long floor rails, wardrobe rear left.",
+  "sources": [
+    "https://www.promobil.de/einzeltest/volkswagen-t6-1-california-ocean-2020/",
+    "https://www.caliboard.de/topic/12680-original-küchenblock-maße-gesucht-abstand-zu-schienen/"
+  ],
+  "removedKg": 70,
+  "modules": [
+    { "id": "cab", "kind": "cabSeats", "label": "Cab seats", "params": { "passenger": "doubleBench" } },
+    { "id": "kitchen", "kind": "kitchenBlock", "label": "Kitchen block", "params": { "x0": 1470, "length": 1430, "maxLength": 1430, "depth": 380, "height": 800, "side": "left", "fridge": "compressor42", "waterL": 30 } },
+    { "id": "wardrobe", "kind": "wardrobe", "label": "Wardrobe", "params": { "x0": 2900, "length": 450, "depth": 320, "height": 1250, "side": "left" } },
+    { "id": "bench", "kind": "rnrBench", "label": "Rear bench", "params": { "model": "cali-1140", "frontX": 1920, "yCenter": 200, "railRange": [1620, 2220], "railStep": 100, "removable": true } }
+  ]
+}

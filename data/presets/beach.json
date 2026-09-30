@@ -1,0 +1,15 @@
+{
+  "id": "beach",
+  "name": "Beach-style",
+  "basedOn": "VW California Beach Camper",
+  "summary": "No fixed kitchen: wide 2-seat bench whose bed flaps give a 1500 mm bed, low lockers behind the wheel arches, portable box kitchen in the boot.",
+  "sources": ["https://cookiescampers.ie/wp-content/uploads/2023/07/california-brochure-BEACH.pdf"],
+  "removedKg": 70,
+  "modules": [
+    { "id": "cab", "kind": "cabSeats", "label": "Cab seats", "params": { "passenger": "doubleBench" } },
+    { "id": "bench", "kind": "rnrBench", "label": "Rear bench", "params": { "model": "beach-1500", "frontX": 1870, "yCenter": 0, "railRange": [1670, 2170], "railStep": 100, "removable": true } },
+    { "id": "lockerL", "kind": "sideLocker", "label": "Locker left", "params": { "x0": 3460, "length": 410, "height": 340, "side": "left", "innerY": 610 } },
+    { "id": "lockerR", "kind": "sideLocker", "label": "Locker right", "params": { "x0": 3460, "length": 410, "height": 340, "side": "right", "innerY": 610 } },
+    { "id": "boxKitchen", "kind": "boxKitchen", "label": "Box kitchen", "params": { "x0": 3300, "length": 550, "width": 600, "height": 330, "yCenter": 0, "fridge": "coolbox", "waterL": 10 } }
+  ]
+}

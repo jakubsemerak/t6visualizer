@@ -1,0 +1,14 @@
+{
+  "id": "trio",
+  "name": "TrioStyle-like",
+  "basedOn": "Reimo TrioStyle T6.1 KR",
+  "summary": "Slim driver-side kitchen with fridge, Variotech-class 3-seat bench on rails (6 lock positions) for a 6th seat, slim tall cabinet.",
+  "sources": ["https://www.reimo.com/media/reimo-com/media/pdf/f1/33/7f/Katalog_VW_T6-1_TrioStyle_2021_web.pdf"],
+  "removedKg": 70,
+  "modules": [
+    { "id": "cab", "kind": "cabSeats", "label": "Cab seats", "params": { "passenger": "doubleBench" } },
+    { "id": "kitchen", "kind": "kitchenBlock", "label": "Kitchen block", "params": { "x0": 1470, "length": 1330, "maxLength": 1330, "depth": 300, "height": 800, "side": "left", "fridge": "compressor42", "waterL": 24 } },
+    { "id": "wardrobe", "kind": "wardrobe", "label": "Tall cabinet", "params": { "x0": 2800, "length": 500, "depth": 230, "height": 1250, "side": "left" } },
+    { "id": "bench", "kind": "rnrBench", "label": "Rear bench", "params": { "model": "reimo-v3000", "frontX": 1870, "yCenter": 160, "railRange": [1730, 2080], "railStep": 70, "removable": true } }
+  ]
+}
