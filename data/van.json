@@ -1,0 +1,46 @@
+{
+  "name": "VW T6.1 Kasten Mixto DoKa KR 3000 mm, normal roof",
+  "frame": "mm. X rearward from the front-axle centre, Y positive to the right (sliding-door side), Z up from the cargo-floor top.",
+  "wheelbase": 3000,
+  "overallLength": 4904,
+  "frontOverhang": 906,
+  "bodyWidth": 1904,
+  "floorAboveRoad": 568,
+  "cabFrontX": -50,
+  "livingStartX": 1470,
+  "rearLimitX": 3870,
+  "lowZ": 100,
+  "beltZ": 650,
+  "interiorHeight": 1370,
+  "sections": [
+    { "x": -50, "low": [-800, 800], "belt": [-790, 790], "roof": [-690, 690] },
+    { "x": 1400, "low": [-830, 830], "belt": [-809, 814], "roof": [-707, 681] },
+    { "x": 1430, "low": [-830, 790], "belt": [-809, 814], "roof": [-707, 681] },
+    { "x": 2450, "low": [-830, 790], "belt": [-809, 814], "roof": [-707, 681] },
+    { "x": 2480, "low": [-830, 830], "belt": [-809, 814], "roof": [-707, 681] },
+    { "x": 3000, "low": [-830, 830], "belt": [-789, 789], "roof": [-696, 695] },
+    { "x": 3870, "low": [-815, 815], "belt": [-788, 789], "roof": [-686, 686] }
+  ],
+  "arch": { "x": [2600, 3450], "height": 341, "innerHalf": 610 },
+  "slidingDoor": { "x": [1430, 2450], "height": 1282, "side": "right" },
+  "tailgate": { "width": 1438, "height": 1299 },
+  "windows": [
+    { "id": "cab-left", "side": "left", "x": [150, 1250], "z": [520, 1150] },
+    { "id": "cab-right", "side": "right", "x": [150, 1250], "z": [520, 1150] },
+    { "id": "load-left", "side": "left", "x": [1500, 2450], "z": [650, 1190] },
+    { "id": "door-right", "side": "right", "x": [1500, 2400], "z": [650, 1190] }
+  ],
+  "cab": { "seatBackX": 1350 },
+  "popTop": { "lift": 930, "x": [1300, 3300], "bed": { "length": 2000, "width": 1200 } },
+  "gvwKg": 3000,
+  "kerbKg": 2118,
+  "approx": ["cabFrontX", "livingStartX", "rearLimitX", "sections", "arch.x", "slidingDoor.x", "windows", "cab.seatBackX", "popTop.x", "floorAboveRoad"],
+  "sources": {
+    "BRO": "https://www.volkswagen-nutzfahrzeuge.de/idhub/content/dam/onehub_nfz/importers/de/download/technische-zeichnungen/transporter/Transporter-6-1-Kastenwagen-KaEcoProfi.pdf",
+    "KA_DRAWING": "https://storage.customized-solution.com/csp-public/content/Technische-Informationen/Transporter/Technische-Zeichnungen/7LA_000_011____DRW_N2D_003_____BAUMASSE___T6-1_KA_KR-LR_N-HD__20210202.pdf",
+    "KOMBI_DRAWING": "https://storage.customized-solution.com/csp-public/content/Technische-Informationen/Transporter/Technische-Zeichnungen/7LA_000_011_A__DRW_N2D_002_____BAUMASSE______T6-1_KOMBI_______20210202.pdf",
+    "ABR": "https://storage.customized-solution.com/csp-public/content/Technische-Informationen/Transporter/Aufbaurichtlinie-Transporter-DE-48-2023.pdf",
+    "CALIFORNIA_AU": "https://www.volkswagen.com.au/idhub/content/dam/onehub_pkw/importers/au/pdfs/showroom-brochures-live/VW_CV_California-6.1_Brochure.pdf",
+    "LISTING": "https://suchen.mobile.de/fahrzeuge/details.html?id=45732773827296"
+  }
+}
