@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:shell": "blender -b --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb"
+    "build:shell": "blender -b --factory-startup --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb"
   },
   "packageManager": "npm@11.12.1",
   "dependencies": {

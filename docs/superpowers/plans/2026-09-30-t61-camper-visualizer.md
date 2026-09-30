@@ -84,7 +84,7 @@ Write `package.json`:
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:shell": "blender -b --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb"
+    "build:shell": "blender -b --factory-startup --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb"
   }
 }
 ```
@@ -2469,7 +2469,7 @@ Write `blender/build_shell.py`:
 """Build the VW T6.1 Mixto SWB interior shell from data/van.json and export it as GLB.
 
 Usage:
-  blender -b --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb [--no-bake] [--samples 32]
+  blender -b --factory-startup --python blender/build_shell.py -- --data data/van.json --out public/models/van.glb [--no-bake] [--samples 32]
 
 Geometry is created directly in the van frame (metres): X rearward from the front axle, Y to the right,
 Z up from the cargo floor. The glTF exporter converts Blender Z-up to glTF Y-up as (x, z, -y), which is the
