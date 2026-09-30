@@ -1,1 +1,4 @@
-document.getElementById('app')!.textContent = 'T6.1 Camper Planner';
+import './style.css';
+import { startApp } from './ui/app';
+
+startApp(document.getElementById('app')!);
