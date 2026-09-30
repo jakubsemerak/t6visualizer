@@ -4162,3 +4162,12 @@ git commit -m "docs: README and dev-server launch config"
   - No Draco.
   - Hard minimum bed width is 1120.
   - AO is baked to vertex colours.
+
+## Deviations found during execution (2026-09-30)
+
+- `~/package.json` declares yarn as its `packageManager`, which blocks npm here. `package.json` now pins `"packageManager": "npm@11.12.1"`.
+- Blender hangs on headless startup when user add-ons load. `build:shell` now runs with `--factory-startup`.
+- The GLB test needs `@types/node`, added to `types` in `tsconfig.json`. `dimensions.ts` uses `instanceof CSS2DObject`.
+- AO distance was reduced from 0.6 m to 0.25 m, because the narrow interior baked too dark.
+- The default camera now starts above the sliding-door side.
+- In walk mode the roof bed is hidden (folded into the tent). Esc exits even without pointer lock, and dragging to look is a fallback when pointer lock is refused (e.g. embedded previews).

@@ -76,7 +76,9 @@ export function startApp(root: HTMLElement): void {
     evaluation = evaluate(VAN, preset, state.overrides);
     const layout = currentLayout();
     const flagged = new Set(evaluation.checks.filter((c) => c.level === 'error').flatMap((c) => c.moduleIds));
-    scene.setModules(layout.modules, flagged);
+    // In walk mode the roof bed is folded up into the tent, as it is for collisions.
+    const visible = state.view === 'walk' ? layout.modules.filter((m) => m.kind !== 'popTopBed') : layout.modules;
+    scene.setModules(visible, flagged);
     scene.setRoof(roofVariant());
     scene.setDimensions(dims && state.view === 'orbit' ? buildDimensionLabels(layout, evaluation.metrics) : null);
     walk.updateLayout(layout);
@@ -119,7 +121,7 @@ export function startApp(root: HTMLElement): void {
       const { ghost } = walk.enter(currentLayout());
       hint.textContent = ghost
         ? 'No free floor space in this mode, so collisions are off. Esc to leave.'
-        : 'WASD walk · mouse look · Shift run · C crouch · X sit · M minimap · Esc leave';
+        : 'WASD walk · mouse look (or drag) · Shift run · C crouch · X sit · M minimap · Esc leave';
     }
     showView();
     update(false);

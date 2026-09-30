@@ -20,6 +20,7 @@ export class WalkController {
   private stance: Stance = 'stand';
   private eye: number = EYE.stand;
   private ghost = false;
+  private euler = new THREE.Euler(0, 0, 0, 'YXZ');
 
   constructor(private camera: THREE.PerspectiveCamera, dom: HTMLElement) {
     this.controls = new PointerLockControls(camera, dom);
@@ -29,11 +30,21 @@ export class WalkController {
     window.addEventListener('keydown', (e) => {
       if (!this.active) return;
       this.keys.add(e.code);
+      // Also leave on Esc when pointer lock was refused (no 'unlock' event then).
+      if (e.code === 'Escape' && !this.controls.isLocked) this.onExit?.();
       if (e.code === 'KeyC') this.stance = this.stance === 'crouch' ? 'stand' : 'crouch';
       if (e.code === 'KeyX') this.stance = this.stance === 'sit' ? 'stand' : 'sit';
       if (e.code === 'KeyM') this.onToggleMinimap?.();
     });
     window.addEventListener('keyup', (e) => this.keys.delete(e.code));
+    // Drag-to-look fallback for browsers or embeds that refuse pointer lock.
+    dom.addEventListener('pointermove', (e) => {
+      if (!this.active || this.controls.isLocked || !(e.buttons & 1)) return;
+      this.euler.setFromQuaternion(this.camera.quaternion);
+      this.euler.y -= e.movementX * 0.004;
+      this.euler.x = Math.max(-1.5, Math.min(1.5, this.euler.x - e.movementY * 0.004));
+      this.camera.quaternion.setFromEuler(this.euler);
+    });
   }
 
   /** Places the camera inside the van and locks the pointer. Must be called from a user gesture. */
@@ -47,7 +58,10 @@ export class WalkController {
     this.eye = eyeHeight(layout.van, layout.popTop, this.pos.x, this.stance);
     this.camera.position.copy(toThree(this.pos.x, this.pos.y, this.eye));
     this.camera.lookAt(toThree(this.pos.x + 1000, this.pos.y, this.eye - 150));
-    this.controls.lock();
+    // Request the lock directly so a refusal is handled instead of surfacing as an unhandled rejection;
+    // PointerLockControls still tracks the lock through the document's pointerlockchange event.
+    const request = this.controls.domElement?.requestPointerLock() as Promise<void> | undefined;
+    request?.catch?.(() => console.info('Pointer lock unavailable; drag to look around.'));
     return { ghost: this.ghost };
   }
 

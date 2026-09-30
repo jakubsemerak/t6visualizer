@@ -59,7 +59,8 @@ export class VanScene {
     ground.receiveShadow = true;
     this.scene.add(ground);
 
-    this.camera.position.set(2.4, 3.4, 3.8);
+    // Start above the sliding-door side, looking across at the driver-side furniture.
+    this.camera.position.copy(toThree(2900, 3300, 3600));
     this.controls = new OrbitControls(this.camera, this.labels.domElement);
     this.controls.target.copy(toThree(2300, 0, 500));
     this.controls.enableDamping = true;

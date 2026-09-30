@@ -258,7 +258,7 @@ def setup_cycles(samples):
     sc.cycles.samples = samples
     world = bpy.data.worlds.new("World")
     sc.world = world
-    world.light_settings.distance = 0.6  # AO distance in metres
+    world.light_settings.distance = 0.25  # AO distance in metres; short, because the van interior is narrow
 
 
 def bake_ao(objs):
