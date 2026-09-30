@@ -1,0 +1,5 @@
+[
+  { "id": "none", "name": "No fridge", "litres": 0, "massKg": 0, "costEur": [0, 0] },
+  { "id": "coolbox", "name": "Portable cool box 25 L", "litres": 25, "massKg": 8, "costEur": [150, 300] },
+  { "id": "compressor42", "name": "Compressor fridge 42 L", "litres": 42, "massKg": 20, "costEur": [700, 1100] }
+]
