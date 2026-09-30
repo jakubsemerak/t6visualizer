@@ -79,7 +79,7 @@ def principled(mat):
 
 def material(name, rgba, rough=0.8, alpha=1.0):
     mat = bpy.data.materials.new(name)
-    if hasattr(mat, "use_nodes") and not mat.use_nodes:
+    if bpy.app.version < (5, 0, 0):  # Blender 5 always uses node materials; the flag is deprecated
         mat.use_nodes = True
     bsdf = principled(mat)
     bsdf.inputs["Base Color"].default_value = rgba
