@@ -98,7 +98,7 @@ Write `tsconfig.json`:
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -145,7 +145,7 @@ document.getElementById('app')!.textContent = 'T6.1 Camper Planner';
 
 - [ ] **Step 2: Install dependencies**
 
-Run: `npm install three && npm install -D typescript vite vitest @types/three`
+Run: `npm install three && npm install -D typescript vite vitest @types/three @types/node`
 Expected: `added N packages`, no errors.
 
 - [ ] **Step 3: Verify the toolchain**
@@ -3013,7 +3013,7 @@ export function buildDimensionLabels(layout: Layout, m: Metrics): THREE.Group {
 /** CSS2DRenderer leaves removed labels in the DOM; call before discarding a label group. */
 export function disposeLabels(g: THREE.Object3D): void {
   g.traverse((o) => {
-    if ((o as CSS2DObject).isCSS2DObject) (o as CSS2DObject).element.remove();
+    if (o instanceof CSS2DObject) o.element.remove();
   });
 }
 ```
